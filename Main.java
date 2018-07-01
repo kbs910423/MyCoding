@@ -1,62 +1,44 @@
-package Robot;
-import java.util.Scanner;
+package DrunkenSamdBeom;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		Scanner keyboard = new Scanner(System.in);
-		int state=2,x=0,y=0;
-		
-		int M = keyboard.nextInt();
-		int n = keyboard.nextInt();		
-		String gar = keyboard.nextLine();
-		
-		for(int i =0; i<n; i++){
-			String order = keyboard.nextLine();
-			int move = Integer.parseInt(order.substring(5));
-			order = order.substring(0,4);
-			
-			if(order.equalsIgnoreCase("TURN")==true)
-			{
-				if(move == 0)
-				{
-					state--;
-					if(state == -1)
-						state =3;
+		int T = Integer.parseInt(in.readLine());
+		for(int i=0; i<T; i++){
+			int N = Integer.parseInt(in.readLine());
+			int room[] = new int[N+1];
+			Arrays.fill(room,0);
+			for(int j=1; j<N+1; j++){
+				for(int k=1; k<N+1; k++){
+					if((k%j)==0){
+						if(room[k]==0)
+							room[k]=1;
+						else if(room[k]==1)
+							room[k]=0;
+					}
 				}
-				else if(move == 1){					
-					state++;
-					if(state == 4)
-						state =0;
-				}
+				
 			}
-			else
-			{
-				switch(state){
-				case 0:
-					x = x-move;
-					break;
-				case 1:
-					y = y+move;
-					break;
-				case 2:
-					x = x+move;
-					break;
-				case 3:
-					y = y-move;
-					break;
-				}
-				if(x < 0 || y < 0){
-					System.out.println("-1");
-					System.exit(1);
-				}
-				if(x>=M || y>=M){
-					System.out.println("-1");
-					System.exit(1);
-				}
+			int count=0;
+			for(int j=1;j<N+1;j++){
+				if(room[j]==1)
+					count++;
 			}
-		}	
-		System.out.println(x+" "+y);
+			System.out.println(count);
+		}
+
 	}
+
 }
