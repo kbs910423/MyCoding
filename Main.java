@@ -1,44 +1,33 @@
-package DrunkenSamdBeom;
+package SangGeunTrip;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException{
 		// TODO Auto-generated method stub
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		int T = Integer.parseInt(in.readLine());
-		for(int i=0; i<T; i++){
-			int N = Integer.parseInt(in.readLine());
-			int room[] = new int[N+1];
-			Arrays.fill(room,0);
-			for(int j=1; j<N+1; j++){
-				for(int k=1; k<N+1; k++){
-					if((k%j)==0){
-						if(room[k]==0)
-							room[k]=1;
-						else if(room[k]==1)
-							room[k]=0;
-					}
-				}
-				
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in)); 
+		 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
+		 int T = Integer.parseInt(in.readLine());
+		 
+		 for(int i=0; i<T; i++){
+			 String ve = in.readLine();
+			 StringTokenizer VE = new StringTokenizer(ve);
+			 int v = Integer.parseInt(VE.nextToken());
+			 int e = Integer.parseInt(VE.nextToken());
+			 int[][] graph = new int[v+1][v+1];
+			 for(int j=0; j<e; j++){
+				String ved = in.readLine();
+				StringTokenizer abc = new StringTokenizer(ved);
+				int a = Integer.parseInt(abc.nextToken());
+				int b = Integer.parseInt(abc.nextToken());
+				graph[a][b] = 1; 
+				graph[b][a] = 1;
 			}
-			int count=0;
-			for(int j=1;j<N+1;j++){
-				if(room[j]==1)
-					count++;
-			}
-			System.out.println(count);
-		}
-
+			 System.out.println(v-1);
+		 }
+			 
 	}
-
 }
+
